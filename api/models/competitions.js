@@ -118,13 +118,17 @@ exports.find = function (id, callback) {
     };
 
     mc.get(id, function (err, value, key) {
+            console.log("get");
+            console.log(value);
         if (value != null) {
+            console.log("if");
             callback({ competition: value });
         } else {
             docClient.query(params, function (err, data) {
                 if (err) {
                     callback({ code: 500 });
                 } else {
+                    mc.set(id, data.Items[0]);
                     callback({ competition: data.Items[0] });
                 }
             });
