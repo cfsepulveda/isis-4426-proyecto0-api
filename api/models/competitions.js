@@ -91,6 +91,14 @@ exports.create = function (competition, user, callback) {
 
 exports.find = function (id, callback) {
 
+    var memjs = require('memjs');
+
+    var mc = memjs.Client.create('mc4.dev.ec2.memcachier.com:11211', {
+        username: 'E2EDC2',
+        password: '71FA50E29DD6D6340F566CA961B1ACE7'
+    });
+
+
     AWS.config.update({
         accessKeyId: process.env.KEYID,
         secretAccessKey: process.env.SECRETKEYID
@@ -109,13 +117,20 @@ exports.find = function (id, callback) {
         }
     };
 
-    docClient.query(params, function (err, data) {
-        if (err) {
-            callback({ code: 500 });
+    mc.get(id, function (err, value, key) {
+        if (value != null) {
+            callback({ competition: value });
         } else {
-            callback({ competition: data.Items[0] });
+            docClient.query(params, function (err, data) {
+                if (err) {
+                    callback({ code: 500 });
+                } else {
+                    callback({ competition: data.Items[0] });
+                }
+            });
         }
     });
+
 }
 
 exports.update = function (competition, id, callback) {
@@ -216,6 +231,4 @@ exports.delete = function (id, callback) {
     });
 
     console.log(id);
-
-
 }
