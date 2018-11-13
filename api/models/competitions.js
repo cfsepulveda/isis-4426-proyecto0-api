@@ -147,7 +147,7 @@ exports.update = function (competition, id, callback) {
     var ddb = new AWS.DynamoDB();
     var d = new Date();
     var dateCreated = "" + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
-
+    console.log(competition);
     var params = {
         TableName: 'competitions',
         Item: {
