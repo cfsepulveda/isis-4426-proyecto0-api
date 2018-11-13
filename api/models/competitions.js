@@ -138,7 +138,7 @@ exports.find = function (id, callback) {
 
 }
 
-exports.update = function (competition, id, callback) {
+exports.update = function (id, competition, callback) {
     AWS.config.update({
         accessKeyId: process.env.KEYID,
         secretAccessKey: process.env.SECRETKEYID
@@ -147,6 +147,7 @@ exports.update = function (competition, id, callback) {
     var ddb = new AWS.DynamoDB();
     var d = new Date();
     var dateCreated = "" + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+    console.log(competition);
     var params = {
         TableName: 'competitions',
         Item: {
@@ -164,6 +165,7 @@ exports.update = function (competition, id, callback) {
 
     ddb.putItem(params, function (err, data) {
         if (err) {
+            console.log(err);
             callback({ code: 500 });
         } else {
             callback({ code: 200 });

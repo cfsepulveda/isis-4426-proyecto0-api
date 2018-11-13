@@ -54,8 +54,8 @@ exports.findByURL = function (req, res) {
 
 exports.update = function (req, res) {
     Competitions.update(
-        req.body,
         req.params.competitionId,
+        req.body,
         function (store) {
             if (store.code == 200)
                 res.status(200).send({ id: req.params.competitionId, ...req.body });
