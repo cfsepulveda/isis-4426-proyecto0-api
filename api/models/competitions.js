@@ -128,10 +128,9 @@ exports.find = function (id, callback) {
                 if (err) {
                     callback({ code: 500 });
                 } else {
-                    var mc = memjs.Client.create('mc4.dev.ec2.memcachier.com:11211', {
-                        username: 'E2EDC2',
-                        password: '71FA50E29DD6D6340F566CA961B1ACE7'
-                    });
+                    console.log("id else");
+                    console.log(id);
+                    console.log(mc);
                     mc.set(id, JSON.stringify(data.Items[0]));
                     callback({ competition: data.Items[0] });
                 }
