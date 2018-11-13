@@ -53,6 +53,7 @@ exports.findByURL = function (req, res) {
 };
 
 exports.update = function (req, res) {
+    console.log(req);
     Competitions.update(
         req.getConnection,
         req.body,
