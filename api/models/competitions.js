@@ -159,7 +159,7 @@ exports.update = function (id, competition, callback) {
             "init": { "S": competition.init },
             "end": { "S": competition.end },
             "prize": { "S": competition.prize },
-            "user": { "S": competition.suser }
+            "user": { "S": competition.user }
         }
     };
 
