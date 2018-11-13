@@ -130,7 +130,11 @@ exports.find = function (id, callback) {
                 } else {
                     console.log("id else");
                     console.log(id);
-                    mc.set(String(id), JSON.stringify(data.Items[0]));
+                    mc.set(String(id), JSON.stringify(data.Items[0]), { flags: 0, exptime: 0 }, function (err, status) {
+                        if (!err) {
+                            console.log(status); // 'STORED' on success!
+                        }
+                    });
                     callback({ competition: data.Items[0] });
                 }
             });
