@@ -147,7 +147,6 @@ exports.update = function (id, competition, callback) {
     var ddb = new AWS.DynamoDB();
     var d = new Date();
     var dateCreated = "" + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
-    console.log(competition);
     var params = {
         TableName: 'competitions',
         Item: {
@@ -208,7 +207,6 @@ exports.delete = function (id, callback) {
 
                 docClient.delete(paramsV, function (err, data) {
                     if (err) {
-                        console.log("primero");
                         console.log(err);
                         callback({ code: 500 });
                     } else {
@@ -224,7 +222,6 @@ exports.delete = function (id, callback) {
             };
             docClient.delete(params, function (err, data) {
                 if (err) {
-                    console.log("segundo");
                     console.log(err);
                     callback({ code: 500 });
                 } else {
