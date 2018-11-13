@@ -117,7 +117,7 @@ exports.find = function (id, callback) {
         }
     };
 
-    mc.get(id, function (err, value, key) {
+    mc.get(String(id), function (err, value, key) {
         console.log("get");
         console.log(value);
         if (value != null) {
@@ -130,8 +130,7 @@ exports.find = function (id, callback) {
                 } else {
                     console.log("id else");
                     console.log(id);
-                    console.log(mc);
-                    mc.set(id, JSON.stringify(data.Items[0]));
+                    mc.set(String(id), JSON.stringify(data.Items[0]));
                     callback({ competition: data.Items[0] });
                 }
             });
