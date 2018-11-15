@@ -15,7 +15,7 @@ exports.create = function (req, res) {
     ) {
         try {
             if (!isNaN(insertedId)) {
-                res.json({ ...req.body, id: insertedId });
+                res.sendStatus(201);
                 return;
             }
             if (insertedId && insertedId.message === "Error existing address") {
@@ -27,7 +27,7 @@ exports.create = function (req, res) {
                 return;
             }
         } catch (error) {
-            res.json({ ...req.body, id: insertedId });
+            res.sendStatus(201);
             return;
         }
 
