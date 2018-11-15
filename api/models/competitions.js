@@ -78,14 +78,19 @@ exports.create = function (competition, user, callback) {
             "user": { "S": user }
         }
     };
-
-    ddb.putItem(params, function (err, data) {
+    
+    try{
+           ddb.putItem(params, function (err, data) {
         if (err) {
             callback({ code: 500 });
         } else {
             callback(0);
         }
-    });
+    }); 
+    }catch(error){
+                    callback(0);
+    }
+
 
 }
 
