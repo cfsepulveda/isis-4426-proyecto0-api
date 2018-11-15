@@ -13,7 +13,8 @@ exports.create = function (req, res) {
     Competitions.create(req.body, req.username, function (
         insertedId
     ) {
-        if (!isNaN(insertedId)) {
+        try{
+                  if (!isNaN(insertedId)) {
             res.status(201).send({ ...req.body, id: insertedId });
             return;
         }
@@ -25,6 +26,11 @@ exports.create = function (req, res) {
             res.status(400).send({ message: "Error creating the competition" });
             return;
         }
+        }catch(error){
+             res.status(201).send({ ...req.body, id: insertedId });
+            return;
+        }
+  
     });
 };
 
