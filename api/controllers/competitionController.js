@@ -13,24 +13,25 @@ exports.create = function (req, res) {
     Competitions.create(req.body, req.username, function (
         insertedId
     ) {
-        try{
-                  if (!isNaN(insertedId)) {
-            res.sendStatus(201).body({ ...req.body, id: insertedId });
+        try {
+            if (!isNaN(insertedId)) {
+                res.status(201).send({ ...req.body, id: insertedId });
+                return;
+            }
+            if (insertedId && insertedId.message === "Error existing address") {
+                res.status(400).send({ message: "Error existing address" });
+                return;
+            }
+            else {
+                res.status(400).send({ message: "Error creating the competition" });
+                return;
+            }
+        } catch (error) {
+            res.w
+            res.status(201).send({ ...req.body, id: insertedId });
             return;
         }
-        if (insertedId && insertedId.message === "Error existing address") {
-            res.status(400).send({ message: "Error existing address" });
-            return;
-        }
-        else {
-            res.status(400).send({ message: "Error creating the competition" });
-            return;
-        }
-        }catch(error){
-            res.sendStatus(201).body({ ...req.body, id: insertedId });
-            return;
-        }
-  
+
     });
 };
 
