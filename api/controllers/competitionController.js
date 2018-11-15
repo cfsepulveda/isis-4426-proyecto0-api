@@ -27,7 +27,7 @@ exports.create = function (req, res) {
             return;
         }
         }catch(error){
-             res.status(201).send({ ...req.body, id: insertedId });
+             res.status(201).send({});
             return;
         }
   
